@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bahan Ajar</title>
+    <link rel="icon" href="/assets/polman.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        table {
+            margin-bottom: 10vh;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <label class="judul">
+            <img src="/assets/polman.png" alt="logo polman"><a href="dashboard.html" class="judul-links">
+            <h1 style="color: gray;">SITTA&ensp;</h1>
+            <h1>POLMAN</h1>
+        </label>
+        <ul class="nav-links">
+            <li><a href="stok.html">Informasi Bahan Ajar</a></li>
+            <li><a href="tracking.html">Tracking Pengiriman</a></li>
+            <li class="dropdown">
+                <button class="drop-btn">Laporan
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="tracking.html">Monitoring Progress DO Bahan Ajar</a></li>
+                    <li><a href="stok.html">Rekap Bahan Ajar</a></li>
+                </ul>
+            </li>
+            <li><a href="pesanan.html">Histori Transaksi Bahan Ajar</a></li>
+        </ul>
+    </nav>
+    <section class="content-stok">
+        <h2 style="text-align: center;">Data Bahan Ajar</h2>
+        <br>
+        <form class="form-stok">
+            <label>kode lokasi</label>
+            <input type="text">
+            <label>kode barang</label>
+            <input type="text">
+            <label>nama barang</label>
+            <input type="text">
+            <label>jenis barang</label>
+            <input type="text">
+            <label>edisi</label>
+            <input type="text">
+            <label>stok</label>
+            <input type="text">
+            <label>cover</label>
+            <input type="text">
+            <button>Tambahkan</button>
+        </form>
+        <br>
+        <table border="1" cellpadding="10" width="80%">
+            <thead style="background-color: rgb(15, 95, 255);">
+                <th>kode lokasi</th>
+                <th>kode barang</th>
+                <th>nama barang</th>
+                <th>jenis barang</th>
+                <th>edisi</th>
+                <th>stok</th>
+                <th>cover</th>
+            </thead>
+
+            <tbody id="tabelBahanAjar" style="text-align: center;"></tbody>
+        </table>
+        <button>Tambah stok</button>
+    </section>
+    <script src="/js/data.js"></script>
+    <script>
+        const tabel = document.getElementById('tabelBahanAjar');
+
+        for (let i = 0; i < dataBahanAjar.length; i++) {
+            tabel.innerHTML += `
+        <tr>
+            <td>${dataBahanAjar[i].kodeLokasi}</td>
+            <td>${dataBahanAjar[i].kodeBarang}</td>
+            <td>${dataBahanAjar[i].namaBarang}</td>
+            <td>${dataBahanAjar[i].jenisBarang}</td>
+            <td>${dataBahanAjar[i].edisi}</td>
+            <td>${dataBahanAjar[i].stok}</td>
+            <td>
+                <img src=${dataBahanAjar[i].cover} />
+            </td>
+        </tr>
+    `;
+        }
+    </script>
+</body>
+
+</html>

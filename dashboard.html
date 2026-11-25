@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="icon" href="/assets/polman.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="judul">
+            <img src="/assets/polman.png" alt="logo polman"><a href="dashboard.html" class="judul-links">
+                <h1 style="color: gray;">SITTA&ensp;</h1>
+                <h1>POLMAN</h1>
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="stok.html">Informasi Bahan Ajar</a></li>
+            <li><a href="tracking.html">Tracking Pengiriman</a></li>
+            <li class="dropdown">
+                <button class="drop-btn" type="button">Laporan
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="tracking.html">Monitoring Progress DO Bahan Ajar</a></li>
+                    <li><a href="stok.html">Rekap Bahan Ajar</a></li>
+                </ul>
+            </li>
+            <li><a href="pesanan.html">Histori Transaksi Bahan Ajar</a></li>
+        </ul>
+    </nav>
+    <section class="content" style="margin-top: 30vh;">
+        <h1>Dashboard Aplikasi SITTA</h1>
+        <br>
+        <p id="sapa"></p>
+    </section>
+    <script>
+        const d = new Date();
+        let jam = d.getHours();
+        let waktuSekarang = '';
+
+        if (jam >= 4 && jam < 10) {
+            waktuSekarang = "Pagi";
+        } else if (jam >= 10 && jam < 15) {
+            waktuSekarang = "Siang";
+        } else if (jam >= 15 && jam < 18) {
+            waktuSekarang = "Sore";
+        } else {
+            waktuSekarang = "Malam";
+        }
+
+        document.getElementById('sapa').innerHTML = `<p>Selamat ${waktuSekarang}</p>`;
+    </script>
+</body>
+
+</html>
