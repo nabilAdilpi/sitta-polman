@@ -19,8 +19,8 @@
     <nav class="navbar">
         <label class="judul">
             <img src="/assets/polman.png" alt="logo polman"><a href="dashboard.html" class="judul-links">
-            <h1 style="color: gray;">SITTA&ensp;</h1>
-            <h1>POLMAN</h1>
+                <h1 style="color: gray;">SITTA&ensp;</h1>
+                <h1>POLMAN</h1>
         </label>
         <ul class="nav-links">
             <li><a href="stok.html">Informasi Bahan Ajar</a></li>
@@ -40,24 +40,6 @@
     <section class="content-stok">
         <h2 style="text-align: center;">Data Bahan Ajar</h2>
         <br>
-        <form class="form-stok">
-            <label>kode lokasi</label>
-            <input type="text">
-            <label>kode barang</label>
-            <input type="text">
-            <label>nama barang</label>
-            <input type="text">
-            <label>jenis barang</label>
-            <input type="text">
-            <label>edisi</label>
-            <input type="text">
-            <label>stok</label>
-            <input type="text">
-            <label>cover</label>
-            <input type="text">
-            <button>Tambahkan</button>
-        </form>
-        <br>
         <table border="1" cellpadding="10" width="80%">
             <thead style="background-color: rgb(15, 95, 255);">
                 <th>kode lokasi</th>
@@ -69,12 +51,69 @@
                 <th>cover</th>
             </thead>
 
-            <tbody id="tabelBahanAjar" style="text-align: center;"></tbody>
+            <tbody id="tabelBahanAjar" style="text-align: center; margin-bottom: 10px;"></tbody>
+            <div style="width: 80%; margin: 0 auto 10px auto; text-align: right;">
+                <button id="tambahStok">Tambah stok</button>
+            </div>
         </table>
-        <button>Tambah stok</button>
     </section>
+    <div id="modalStok" class="modal-stok">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-2">&times;</span>
+                <h2>Tambah stok</h2>
+            </div>
+            <div class="modal-body">
+                <form class="form-stok" id="formStok">
+                    <div class="form-grid">
+                        <div class="kolom-kiri">
+                            <label>kode lokasi</label><br>
+                            <input type="text" id="inputLokasi" required><br>
+
+                            <label>kode barang</label><br>
+                            <input type="text" id="inputKode" required><br>
+
+                            <label>nama barang</label><br>
+                            <input type="text" id="inputNama" required><br>
+                        </div>
+
+                        <div class="kolom-kanan">
+                            <label>jenis barang</label><br>
+                            <input type="text" id="inputJenis" required><br>
+
+                            <label>edisi</label><br>
+                            <input type="text" id="inputEdisi" required><br>
+
+                            <label>stok</label><br>
+                            <input type="number" id="inputStok" required>
+                        </div>
+
+                        <div class="kolom-penuh">
+                            <label>cover</label><br>
+                            <input type="file" id="inputCover" accept="image/*" required>
+                        </div>
+                    </div>
+
+                    <button type="submit">Tambah</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
     <script src="/js/data.js"></script>
     <script>
+        const spanS = document.getElementsByClassName('close-2')[0];
+        const modalStok = document.getElementById('modalStok');
+        const btnS = document.getElementById('tambahStok');
+
+        btnS.onclick = () => {
+            modalStok.style.display = 'block';
+        }
+
+        spanS.onclick = () => {
+            modalStok.style.display = 'none';
+        }
+
         const tabel = document.getElementById('tabelBahanAjar');
 
         for (let i = 0; i < dataBahanAjar.length; i++) {
@@ -92,6 +131,40 @@
         </tr>
     `;
         }
+
+        const formStok = document.getElementById('formStok');
+
+        formStok.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const kodeLokasi = document.getElementById('inputLokasi').value;
+            const kodeBarang = document.getElementById('inputKode').value;
+            const namaBarang = document.getElementById('inputNama').value;
+            const jenisBarang = document.getElementById('inputJenis').value;
+            const edisi = document.getElementById('inputEdisi').value;
+            const stok = document.getElementById('inputStok').value;
+            const fileCover = document.getElementById('inputCover').files[0];
+
+            const coverUrl = fileCover ? URL.createObjectURL(fileCover) : '';
+
+            const barisBaru = `
+        <tr>
+            <td>${kodeLokasi}</td>
+            <td>${kodeBarang}</td>
+            <td>${namaBarang}</td>
+            <td>${jenisBarang}</td>
+            <td>${edisi}</td>
+            <td>${stok}</td>
+            <td>
+                <img src="${coverUrl}" alt="cover" width="60" />
+            </td>
+        </tr>
+    `;
+
+            tabel.innerHTML += barisBaru;
+            formStok.reset();
+            modalStok.style.display = 'none';
+        });
     </script>
 </body>
 

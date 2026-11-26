@@ -1,22 +1,9 @@
 // script halaman login
 
-// modal lupa password
-let spanPw = document.getElementsByClassName('close-1')[0];
-let tmbl = document.getElementById('forgotPw');
-let modalPw = document.getElementById('modalPw');
-
-tmbl.onclick = () => {
-    modalPw.style.display = 'block';
-}
-
-spanPw.onclick = () => {
-    modalPw.style.display = 'none';
-}
-
 // modal daftar akun
-let span = document.getElementsByClassName('close')[0];
-let modalReg = document.getElementById('modalReg');
-let btn = document.getElementById('buatAkun');
+const span = document.getElementsByClassName('close')[0];
+const modalReg = document.getElementById('modalReg');
+const btn = document.getElementById('buatAkun');
 
 btn.onclick = () => {
     modalReg.style.display = 'block';
@@ -24,6 +11,42 @@ btn.onclick = () => {
 
 span.onclick = () => {
     modalReg.style.display = 'none';
+}
+
+const formReg = document.getElementById('daftarAkun');
+
+formReg.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const regEmail = document.getElementById('regEmail').value;
+    const regPw = document.getElementById('regPw').value;
+
+    const akunBaru = {
+        id: dataPengguna.length + 1,
+        nama: "Pengguna baru",
+        email: regEmail,
+        password: regPw,
+        role: "Mahasiswa",
+        lokasi: "Pusat"
+    };
+
+    dataPengguna.push(akunBaru);
+    alert("Akun berhasil didaftar!");
+    formReg.reset();
+    modalReg.style.display = 'none';
+});
+
+// modal lupa password
+const spanPw = document.getElementsByClassName('close-1')[0];
+const modalPw = document.getElementById('modalPw');
+const tmbl = document.getElementById('forgotPw');
+
+tmbl.onclick = () => {
+    modalPw.style.display = 'block';
+}
+
+spanPw.onclick = () => {
+    modalPw.style.display = 'none';
 }
 
 // masuk halaman dashboard
